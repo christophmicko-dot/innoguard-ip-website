@@ -538,3 +538,25 @@
     <a href="#datenschutz" style="color:#C9A84C;text-decoration:none;font-size:0.9rem;">Datenschutzerklärung</a>
   </nav>
   <p><a href="/cdn-cgi/l/email-protection#264f484049664f48484941534754420b4f560845494b"><span class="__cf_email__" data-cfemail="85ecebe3eac5ecebebeae2f0e4f7e1a8ecf5abe6eae8">[emai
+
+<script>
+window.addEventListener('load', function () {
+  var splash = document.getElementById('splash');
+  if (!splash) return;
+
+  function hideSplash() {
+    splash.style.transition = 'opacity 0.8s';
+    splash.style.opacity = '0';
+    setTimeout(function () { splash.style.display = 'none'; }, 850);
+  }
+
+  var bar = document.getElementById('splash-bar-inner');
+  if (bar) {
+    bar.addEventListener('animationend', function () {
+      setTimeout(hideSplash, 300);
+    });
+  }
+  // Fallback: immer nach 2.5s ausblenden
+  setTimeout(hideSplash, 2500);
+});
+</script>
