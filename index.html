@@ -168,50 +168,17 @@
   .studie-num-card.visible .big { animation: goldPop 0.55s ease forwards; }
 
 
-  /* SPLASH SCREEN */
-  #splash {
-    position: fixed; inset: 0; z-index: 999;
-    background: #0D1B2A;
-    display: flex; align-items: center; justify-content: center;
-    flex-direction: column;
-    transition: opacity 0.8s ease, visibility 0.8s ease;
-  }
-  #splash.hide { opacity: 0; visibility: hidden; pointer-events: none; }
-  #splash img {
-    width: min(480px, 80vw);
-    opacity: 0;
-    transform: scale(0.9);
-    animation: splashIn 0.9s ease 0.3s forwards;
-  }
-  @keyframes splashIn {
-    to { opacity: 1; transform: scale(1); }
-  }
-  #splash-bar {
-    margin-top: 48px;
-    width: 160px; height: 2px;
-    background: rgba(201,168,76,0.2);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-  #splash-bar-inner {
-    height: 100%; width: 0;
-    background: #C9A84C;
-    border-radius: 2px;
-    animation: loadBar 1.4s ease forwards;
-  }
-  @keyframes loadBar { to { width: 100%; } }
-
-  /* NAV LOGO scroll behaviour */
-  .nav-logo-img {
-    height: 36px;
-    opacity: 0;
-    transform: scale(0.8);
-    transition: opacity 0.4s ease, transform 0.4s ease;
-  }
-  .nav-logo-img.show { opacity: 1; transform: scale(1); }
-  .nav-logo-svg { transition: opacity 0.4s ease, transform 0.4s ease; }
-  .nav-logo-svg.hide { opacity: 0; transform: scale(0.7); }
-
+  /* === MODAL LEGAL === */
+.legal-modal{display:none;position:fixed;inset:0;z-index:9999;align-items:flex-start;justify-content:center;padding:2rem 1rem;overflow-y:auto}
+.legal-modal.open{display:flex}
+.legal-modal-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.65);backdrop-filter:blur(4px)}
+.legal-modal-box{position:relative;z-index:1;background:#0D1B2A;color:#f0f0f0;border-radius:16px;max-width:820px;width:100%;padding:3rem 2.5rem;margin:auto;box-shadow:0 24px 60px rgba(0,0,0,.55);line-height:1.8}
+.legal-modal-close{position:sticky;top:0;float:right;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.3);color:#C9A84C;font-size:1.4rem;cursor:pointer;line-height:1;padding:.3rem .7rem;border-radius:8px;transition:background .2s;margin-bottom:1rem}
+.legal-modal-close:hover{background:rgba(201,168,76,.25)}
+.legal-modal-box h2{font-family:'DM Serif Display',serif;color:#C9A84C;font-size:2rem;margin-bottom:2rem}
+.legal-modal-box h3{color:#C9A84C;margin-top:1.5rem}
+.legal-modal-box h4{color:#e0c98a;margin-top:1rem}
+.legal-modal-box a{color:#C9A84C}
 
 /* === SCROLL REVEAL === */
 .reveal{opacity:0;transform:translateY(28px);transition:opacity .75s ease,transform .75s ease}
@@ -254,9 +221,7 @@
 <body>
 
 <!-- SPLASH SCREEN -->
-<div id="splash">
-  <img src="image%20Innoguard.png" alt="InnoGuard-IP Logo">
-  <div id="splash-bar"><div id="splash-bar-inner"></div></div>
+</div>
 </div>
 
 
@@ -279,7 +244,7 @@
     <li><a href="#stufen">Unser Ansatz</a></li>
     <li><a href="#vorteile">Ihr Mehrwert</a></li>
     <li><a href="#ueber">Über uns</a></li>
-    <li><a href="#impressum">Impressum</a></li>
+    <li><a href="#" onclick="openLegalModal('impressum');return false;">Impressum</a></li>
   </ul>
 </nav>
 
@@ -549,7 +514,7 @@
     </div>
   </div>
 </section>
-<section id="impressum" style="background:#0D1B2A;color:#f0f0f0;padding:80px 20px;">
+<div id="modal-impressum" class="legal-modal"><div class="legal-modal-backdrop" onclick="closeLegalModal()"></div><div class="legal-modal-box"><button class="legal-modal-close" onclick="closeLegalModal()" aria-label="Schließen">✕ Schließen</button>
   <div style="max-width:800px;margin:0 auto;">
     <h2 style="font-family:'DM Serif Display',serif;color:#C9A84C;font-size:2rem;margin-bottom:2rem;">Impressum</h2>
 
@@ -570,10 +535,11 @@
     <h3 style="color:#C9A84C;margin-top:1.5rem;">Urheberrecht</h3>
     <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.</p>
   </div>
-</section>
+</div></div></div>
+
 
 <!-- =================== DATENSCHUTZ =================== -->
-<section id="datenschutz" style="background:#111f2e;color:#f0f0f0;padding:80px 20px;">
+<div id="modal-datenschutz" class="legal-modal"><div class="legal-modal-backdrop" onclick="closeLegalModal()"></div><div class="legal-modal-box"><button class="legal-modal-close" onclick="closeLegalModal()" aria-label="Schließen">✕ Schließen</button>
   <div style="max-width:800px;margin:0 auto;line-height:1.8;">
     <h2 style="font-family:'DM Serif Display',serif;color:#C9A84C;font-size:2rem;margin-bottom:2rem;">Datenschutzerklärung</h2>
 
@@ -633,37 +599,27 @@
     <h3 style="color:#C9A84C;margin-top:2rem;">8. Aktualität und Änderungen</h3>
     <p>Diese Datenschutzerklärung ist aktuell gültig und hat den Stand März 2026. Durch die Weiterentwicklung unserer Website oder aufgrund geänderter gesetzlicher Vorgaben kann eine Anpassung notwendig werden. Die jeweils aktuelle Fassung ist jederzeit unter <a href="https://innoguard-ip.com/#datenschutz" style="color:#C9A84C;">innoguard-ip.com/#datenschutz</a> abrufbar.</p>
   </div>
-</section>
+</div></div></div>
+
 
 <footer>
   <p style="margin-bottom:6px;"><strong style="color:rgba(255,255,255,0.7)">InnoGuard-IP</strong> &nbsp;|&nbsp; Innovations- &amp; Erfindungsmanagement für KMU</p>
   <nav style="margin-top:1.5rem;display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;">
-    <a href="#impressum" style="color:#C9A84C;text-decoration:none;font-size:0.9rem;">Impressum</a>
-    <a href="#datenschutz" style="color:#C9A84C;text-decoration:none;font-size:0.9rem;">Datenschutzerklärung</a>
-  </nav>
+  <a href="#" onclick="openLegalModal('impressum');return false;" style="color:#C9A84C;text-decoration:none;font-size:0.9rem;">Impressum</a>
+  <a href="#" onclick="openLegalModal('datenschutz');return false;" style="color:#C9A84C;text-decoration:none;font-size:0.9rem;">Datenschutzerklärung</a>
+</nav>
   <p><a href="/cdn-cgi/l/email-protection#264f484049664f48484941534754420b4f560845494b"><span class="__cf_email__" data-cfemail="85ecebe3eac5ecebebeae2f0e4f7e1a8ecf5abe6eae8">[emai
 
 <script>
-window.addEventListener('load', function () {
-  var splash = document.getElementById('splash');
-  if (!splash) return;
-
-  function hideSplash() {
-    splash.style.transition = 'opacity 0.8s';
-    splash.style.opacity = '0';
-    setTimeout(function () { splash.style.display = 'none'; }, 850);
-  }
-
-  var bar = document.getElementById('splash-bar-inner');
-  if (bar) {
-    bar.addEventListener('animationend', function () {
-      setTimeout(hideSplash, 300);
-    });
-  }
-  // Fallback: immer nach 2.5s ausblenden
-  setTimeout(hideSplash, 2500);
-});
-</script>
+function openLegalModal(id){
+  var m=document.getElementById('modal-'+id);
+  if(m){m.classList.add('open');document.body.style.overflow='hidden';}
+}
+function closeLegalModal(){
+  document.querySelectorAll('.legal-modal').forEach(function(m){m.classList.remove('open');});
+  document.body.style.overflow='';
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLegalModal();});
 
 <script>
 (function(){
