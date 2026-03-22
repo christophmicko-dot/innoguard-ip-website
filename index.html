@@ -611,11 +611,11 @@
   <p><a href="/cdn-cgi/l/email-protection#264f484049664f48484941534754420b4f560845494b"><span class="__cf_email__" data-cfemail="85ecebe3eac5ecebebeae2f0e4f7e1a8ecf5abe6eae8">[emai
 
 <script>
-function openLegalModal(id){
+window.openLegalModal=function(id){
   var m=document.getElementById('modal-'+id);
   if(m){m.classList.add('open');document.body.style.overflow='hidden';}
 }
-function closeLegalModal(){
+window.closeLegalModal=function(){
   document.querySelectorAll('.legal-modal').forEach(function(m){m.classList.remove('open');});
   document.body.style.overflow='';
 }
